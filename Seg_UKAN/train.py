@@ -55,7 +55,7 @@ def parse_args():
 
     parser.add_argument('--name', default=None,
                         help='model name: (default: arch+timestamp)')
-    parser.add_argument('--epochs', default=400, type=int, metavar='N',
+    parser.add_argument('--epochs', default=200, type=int, metavar='N',
                         help='number of total epochs to run')
     parser.add_argument('-b', '--batch_size', default=8, type=int,
                         metavar='N', help='mini-batch size (default: 16)')
@@ -85,7 +85,7 @@ def parse_args():
                         ' (default: BCEDiceLoss)')
     
     # dataset
-    parser.add_argument('--dataset', default='busi', help='dataset name')      
+    parser.add_argument('--dataset', default='TYPE2', help='dataset name')      
     parser.add_argument('--data_dir', default='inputs', help='dataset dir')
 
     parser.add_argument('--output_dir', default='outputs', help='ouput dir')
@@ -124,7 +124,7 @@ def parse_args():
     parser.add_argument('--early_stopping', default=-1, type=int,
                         metavar='N', help='early stopping (default: -1)')
     parser.add_argument('--cfg', type=str, metavar="FILE", help='path to config file', )
-    parser.add_argument('--num_workers', default=4, type=int)
+    parser.add_argument('--num_workers', default=40, type=int)
 
     parser.add_argument('--no_kan', action='store_true')
 
@@ -322,11 +322,11 @@ def main():
     dataset_name = config['dataset']
     img_ext = '.png'
 
-    if dataset_name == 'busi':
-        mask_ext = '_mask.png'
-    elif dataset_name == 'glas':
+    if dataset_name == 'TYPE1':
         mask_ext = '.png'
-    elif dataset_name == 'cvc':
+    elif dataset_name == 'TYPE2':
+        mask_ext = '.png'
+    elif dataset_name == 'TYPE3':
         mask_ext = '.png'
 
     # Data loading code

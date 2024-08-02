@@ -21,9 +21,9 @@ _C.DATA = CN()
 # Batch size for a single GPU, could be overwritten by command line argument
 _C.DATA.BATCH_SIZE = 1
 # Path to dataset, could be overwritten by command line argument
-_C.DATA.DATA_PATH = ''
+_C.DATA.DATA_PATH = '/cluster/projects/nn10004k/ml_SeaObject_Data/OASIs_dataset_ukan'
 # Dataset name
-_C.DATA.DATASET = 'imagenet'
+_C.DATA.DATASET = 'OASIs'
 # Input image size
 _C.DATA.IMG_SIZE = 512
 # Interpolation to resize image (random, bilinear, bicubic)
@@ -36,7 +36,7 @@ _C.DATA.CACHE_MODE = 'part'
 # Pin CPU memory in DataLoader for more efficient (sometimes) transfer to GPU.
 _C.DATA.PIN_MEMORY = True
 # Number of data loading threads
-_C.DATA.NUM_WORKERS = 8
+_C.DATA.NUM_WORKERS = 40
 
 # -----------------------------------------------------------------------------
 # Model settings
@@ -50,7 +50,7 @@ _C.MODEL.NAME = 'swin_tiny_patch4_window7_224'
 _C.MODEL.PRETRAIN_CKPT = './pretrained_ckpt/swin_tiny_patch4_window7_224.pth'
 _C.MODEL.RESUME = ''
 # Number of classes, overwritten in data preparation
-_C.MODEL.NUM_CLASSES = 1000
+_C.MODEL.NUM_CLASSES = 4
 # Dropout rate
 _C.MODEL.DROP_RATE = 0.0
 # Drop path rate
@@ -79,7 +79,7 @@ _C.MODEL.SWIN.FINAL_UPSAMPLE= "expand_first"
 # -----------------------------------------------------------------------------
 _C.TRAIN = CN()
 _C.TRAIN.START_EPOCH = 0
-_C.TRAIN.EPOCHS = 300
+_C.TRAIN.EPOCHS = 100
 _C.TRAIN.WARMUP_EPOCHS = 20
 _C.TRAIN.WEIGHT_DECAY = 0.05
 _C.TRAIN.BASE_LR = 5e-4
@@ -155,7 +155,7 @@ _C.TEST.CROP = True
 # overwritten by command line argument
 _C.AMP_OPT_LEVEL = ''
 # Path to output folder, overwritten by command line argument
-_C.OUTPUT = ''
+_C.OUTPUT = '/cluster/projects/nn10004k/ml_SeaObject_Data/oasi_results'
 # Tag of experiment, overwritten by command line argument
 _C.TAG = 'default'
 # Frequency to save checkpoint

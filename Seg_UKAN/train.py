@@ -39,7 +39,7 @@ import subprocess
 from pdb import set_trace as st
 
 
-ARCH_NAMES = archs.__all__
+ARCH_NAMES = archs.__file__ #archs.__all__
 LOSS_NAMES = losses.__all__
 LOSS_NAMES.append('BCEWithLogitsLoss')
 
@@ -86,9 +86,9 @@ def parse_args():
     
     # dataset
     parser.add_argument('--dataset', default='TYPE2', help='dataset name')      
-    parser.add_argument('--data_dir', default='inputs', help='dataset dir')
+    parser.add_argument('--data_dir', default='/cluster/projects/nn10004k/ml_SeaObject_Data/OASIs_dataset_ukan', help='dataset dir')
 
-    parser.add_argument('--output_dir', default='outputs', help='ouput dir')
+    parser.add_argument('--output_dir', default='/cluster/projects/nn10004k/ml_SeaObject_Data/oasi_result/outputs', help='ouput dir')
 
 
     # optimizer

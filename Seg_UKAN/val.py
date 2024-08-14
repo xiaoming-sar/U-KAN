@@ -67,11 +67,11 @@ def main():
     dataset_name = config['dataset']
     img_ext = '.png'
 
-    if dataset_name == 'busi':
-        mask_ext = '_mask.png'
-    elif dataset_name == 'glas':
+    if dataset_name == 'TYPE1':
         mask_ext = '.png'
-    elif dataset_name == 'cvc':
+    elif dataset_name == 'TYPE2':
+        mask_ext = '.png'
+    elif dataset_name == 'TYPE3':
         mask_ext = '.png'
 
     # Data loading code

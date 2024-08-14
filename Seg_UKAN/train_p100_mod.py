@@ -125,7 +125,7 @@ def parse_args():
     parser.add_argument('--early_stopping', default=-1, type=int,
                         metavar='N', help='early stopping (default: -1)')
     parser.add_argument('--cfg', type=str, metavar="FILE", help='path to config file', )
-    parser.add_argument('--num_workers', default=5, type=int)
+    parser.add_argument('--num_workers', default=0, type=int)
 
     parser.add_argument('--no_kan', action='store_true')
 
@@ -273,11 +273,13 @@ def main():
     cudnn.benchmark = True
 
     # create model
-    model = archs.__dict__[config['arch']](config['num_classes'], config['input_channels'], config['deep_supervision'], 
-                           embed_dims=config['input_list'], no_kan=config['no_kan'])
+    model = archs.__dict__[config['arch']](config['num_classes'], config['input_channels'],
+                           config['deep_supervision'], embed_dims=config['input_list'], no_kan=config['no_kan'])
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model.to(device) 
+    model.to(device) #model = model.cuda()
+    # Compile the model
+    # model = torch.compile(model)
 
     param_groups = []
 

@@ -40,6 +40,28 @@ class Dataset(torch.utils.data.Dataset):
                 |   ├── 0b1761.png
                 |   ├── ...
                 ...
+        <table style="border: 2px;">
+            <tr>
+                <td colspan="3" align="center"> Annotated colors in each label 
+            </td>
+            </tr><tr>
+                <td align="center"> Class </td>
+                <td align="center"> Grayscale </td>
+            </tr><tr>
+                <td align="center"> Others </td>
+                <td align="center"> 0 </td>  0
+            </tr><tr>
+                <td align="center"> Sky </td>
+                <td align="center"> 50 </td> 1
+            </tr><tr>
+                <td align="center"> Land </td>
+                <td align="center"> 100 </td> 2
+            </tr>
+            <tr>
+                <td align="center"> Sea Objects </td>
+                <td align="center"> 150 </td> 3
+                </tr>
+        </table>
         """
         self.img_ids = img_ids
         self.img_dir = img_dir
@@ -55,7 +77,7 @@ class Dataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         img_id = self.img_ids[idx]
         
-        img = cv2.imread(os.path.join(self.img_dir, img_id + self.img_ext))
+        img = cv2.imread(os.path.join(self.img_dir, img_id + self.img_ext)) # img.shape  (512, 512, 3)
 
         mask = []
         for i in range(self.num_classes):
@@ -65,7 +87,7 @@ class Dataset(torch.utils.data.Dataset):
 
             mask.append(cv2.imread(os.path.join(self.mask_dir, str(i),
                         img_id + self.mask_ext), cv2.IMREAD_GRAYSCALE)[..., None])
-        mask = np.dstack(mask)
+        mask = np.dstack(mask) # mask.shape (512, 512, 4)
 
         if self.transform is not None:
             augmented = self.transform(image=img, mask=mask)
@@ -73,9 +95,9 @@ class Dataset(torch.utils.data.Dataset):
             mask = augmented['mask']
         
         img = img.astype('float32') / 255
-        img = img.transpose(2, 0, 1)
-        mask = mask.astype('float32') / 255
-        mask = mask.transpose(2, 0, 1)
+        img = img.transpose(2, 0, 1) # img.shape (3, 512, 512)
+        mask = mask.astype('float32') / 255 #np.max(mask) 1.0 and np.min(mask) 0.0
+        mask = mask.transpose(2, 0, 1)  # mask.shape (4, 512, 512)
 
         if mask.max()<1:
             mask[mask>0] = 1.0

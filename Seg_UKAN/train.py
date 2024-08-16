@@ -56,7 +56,7 @@ def parse_args():
 
     parser.add_argument('--name', default="None", type=str,
                         help='model name: (default: arch+timestamp)')
-    parser.add_argument('--epochs', default=30, type=int, metavar='N',
+    parser.add_argument('--epochs', default=50, type=int, metavar='N',
                         help='number of total epochs to run')
     parser.add_argument('-b', '--batch_size', default=8, type=int,
                         metavar='N', help='mini-batch size (default: 16)')
@@ -72,9 +72,9 @@ def parse_args():
                         help='input channels')
     parser.add_argument('--num_classes', default=4, type=int,
                         help='number of classes')
-    parser.add_argument('--input_w', default=512, type=int,
+    parser.add_argument('--input_w', default=1280, type=int,
                         help='image width')
-    parser.add_argument('--input_h', default=512, type=int,
+    parser.add_argument('--input_h', default=720, type=int,
                         help='image height')
     parser.add_argument('--input_list', type=list_type, default=[128, 160, 256])
 
@@ -86,10 +86,10 @@ def parse_args():
                         ' (default: BCEDiceLoss)')
     
     # dataset
-    parser.add_argument('--dataset', default='TYPE2', help='dataset name')      
-    parser.add_argument('--data_dir', default='/cluster/projects/nn10004k/ml_SeaObject_Data/OASIs_dataset_ukan', help='dataset dir')
+    parser.add_argument('--dataset', default='TYPE1', help='dataset name')      
+    parser.add_argument('--data_dir', default='/cluster/projects/nn10004k/ml_SeaObject_Data/OASIs_dataset_patch896_exclude_ukan', help='dataset dir')
 
-    parser.add_argument('--output_dir', default='/cluster/projects/nn10004k/ml_SeaObject_Data/oasi_result/outputs', help='ouput dir')
+    parser.add_argument('--output_dir', default='/cluster/projects/nn10004k/ml_SeaObject_Data/oasi_result/patch_896_exclude98', help='ouput dir')
 
 
     # optimizer
